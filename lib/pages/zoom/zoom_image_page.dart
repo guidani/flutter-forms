@@ -8,7 +8,7 @@ class ZoomImage extends StatefulWidget {
 }
 
 class _ZoomImageState extends State<ZoomImage> {
-  double _currentSliderValue = 0;
+  double _currentSliderValue = 1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +26,6 @@ class _ZoomImageState extends State<ZoomImage> {
             children: [
               Spacer(),
               Container(
-                width: 300.0,
                 decoration: BoxDecoration(
                   border: Border.all(
                     style: BorderStyle.solid,
@@ -34,17 +33,18 @@ class _ZoomImageState extends State<ZoomImage> {
                     width: 5.0,
                   ),
                 ),
-                child: Image.asset(
-                  'assets/images/imagem01.png',
-                  // scale: 2,
-                  // fit: BoxFit.cover,
+                child: Transform.scale(
+                  scale: _currentSliderValue,
+                  child: Image.asset(
+                    'assets/images/imagem01.png',
+                    // fit: BoxFit.cover,
+                  ),
                 ),
               ),
               Spacer(),
               Slider(
                   value: _currentSliderValue,
                   max: 10,
-                  // divisions: 10,
                   label: _currentSliderValue.round().toString(),
                   onChanged: (double value) {
                     setState(() {
