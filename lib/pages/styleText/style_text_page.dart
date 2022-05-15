@@ -19,6 +19,11 @@ class _StyleTextPageState extends State<StyleTextPage> {
     "isUnderline": false
   };
 
+  bool _telemetryCheckbox = false;
+  bool _promotionCheckbox = false;
+  bool _serviceTermsCheckbox = false;
+  bool _acceptAllTerms = false;
+
   List<bool> _selections = List.generate(3, (_) => false);
 
   @override
@@ -52,6 +57,11 @@ class _StyleTextPageState extends State<StyleTextPage> {
                   textInputAction: TextInputAction.next,
                   autofocus: true,
                   focusNode: myFocusNode,
+                  validator: (text) {
+                    if (text == null || text.isEmpty) {
+                      return 'Este campo precisa ser preenchido';
+                    }
+                  },
                   decoration: const InputDecoration(
                     label: Text('Nome'),
                     hintText: 'Digite seu nome',
@@ -128,10 +138,10 @@ class _StyleTextPageState extends State<StyleTextPage> {
                     children: [
                       ListTile(
                         leading: Checkbox(
-                          value: false,
+                          value: _telemetryCheckbox,
                           onChanged: (value) {
                             setState(() {
-                              value = value;
+                              _telemetryCheckbox = value!;
                             });
                           },
                         ),
@@ -140,10 +150,10 @@ class _StyleTextPageState extends State<StyleTextPage> {
                       ),
                       ListTile(
                         leading: Checkbox(
-                          value: false,
+                          value: _promotionCheckbox,
                           onChanged: (value) {
                             setState(() {
-                              value = value;
+                              _promotionCheckbox = value!;
                             });
                           },
                         ),
@@ -152,10 +162,10 @@ class _StyleTextPageState extends State<StyleTextPage> {
                       ),
                       ListTile(
                         leading: Checkbox(
-                          value: false,
+                          value: _serviceTermsCheckbox,
                           onChanged: (value) {
                             setState(() {
-                              value = value;
+                              _serviceTermsCheckbox = value!;
                             });
                           },
                         ),
@@ -163,10 +173,13 @@ class _StyleTextPageState extends State<StyleTextPage> {
                       ),
                       ListTile(
                         leading: Checkbox(
-                          value: false,
+                          value: _acceptAllTerms,
                           onChanged: (value) {
                             setState(() {
-                              value = value;
+                              _acceptAllTerms = value!;
+                              _serviceTermsCheckbox = value;
+                              _promotionCheckbox = value;
+                              _telemetryCheckbox = value;
                             });
                           },
                         ),
