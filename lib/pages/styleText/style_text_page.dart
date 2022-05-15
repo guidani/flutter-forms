@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+String loremText =
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In facilisis auctor laoreet. Aenean varius fringilla dolor facilisis efficitur. Maecenas eleifend laoreet leo, ut faucibus urna tempus ut. Mauris ullamcorper et enim a pulvinar. Nulla molestie tortor et imperdiet luctus. Maecenas vel libero at ipsum condimentum egestas eget vel enim. Integer ut orci vitae sem auctor iaculis non id lectus. Pellentesque lobortis, libero id tempus dignissim, urna ex dapibus ante, sed tincidunt justo orci ut metus. Donec at ante laoreet dolor pharetra hendrerit id vel nisl.Lorem ipsum dolor sit amet, consectetur adipiscing elit. In facilisis auctor laoreet. Aenean varius fringilla dolor facilisis efficitur. Maecenas eleifend laoreet leo, ut faucibus urna tempus ut. Mauris ullamcorper et enim a pulvinar. Nulla molestie tortor et imperdiet luctus. Maecenas vel libero at ipsum condimentum egestas eget vel enim. Integer ut orci vitae sem auctor iaculis non id lectus. Pellentesque lobortis, libero id tempus dignissim, urna ex dapibus ante, sed tincidunt justo orci ut metus. Donec at ante laoreet dolor pharetra hendrerit id vel nisl.Lorem ipsum dolor sit amet, consectetur adipiscing elit. In facilisis auctor laoreet. Aenean varius fringilla dolor facilisis efficitur. Maecenas eleifend laoreet leo, ut faucibus urna tempus ut. Mauris ullamcorper et enim a pulvinar. Nulla molestie tortor et imperdiet luctus. Maecenas vel libero at ipsum condimentum egestas eget vel enim. Integer ut orci vitae sem auctor iaculis non id lectus. Pellentesque lobortis, libero id tempus dignissim, urna ex dapibus ante, sed tincidunt justo orci ut metus. Donec at ante laoreet dolor pharetra hendrerit id vel nisl.';
+
 class StyleTextPage extends StatefulWidget {
   const StyleTextPage({Key? key}) : super(key: key);
 
@@ -8,8 +11,12 @@ class StyleTextPage extends StatefulWidget {
 }
 
 class _StyleTextPageState extends State<StyleTextPage> {
+  final _formKey = GlobalKey<FormState>();
   late FocusNode myFocusNode;
   TextEditingController _descriptionController = TextEditingController();
+  TextEditingController _nameController = TextEditingController();
+  TextEditingController _lastNameController = TextEditingController();
+
   bool isItalic = false;
   bool isBold = false;
   bool isUnderline = false;
@@ -44,16 +51,20 @@ class _StyleTextPageState extends State<StyleTextPage> {
   Widget build(BuildContext context) {
     print(decorations.keys);
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: const Text("Toggle text style"),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Center(
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
           child: Form(
+            key: _formKey,
             child: Column(
               children: [
                 TextFormField(
+                  onChanged: (value) {},
+                  controller: _nameController,
                   textInputAction: TextInputAction.next,
                   autofocus: true,
                   focusNode: myFocusNode,
@@ -61,6 +72,7 @@ class _StyleTextPageState extends State<StyleTextPage> {
                     if (text == null || text.isEmpty) {
                       return 'Este campo precisa ser preenchido';
                     }
+                    return null;
                   },
                   decoration: const InputDecoration(
                     label: Text('Nome'),
@@ -72,7 +84,14 @@ class _StyleTextPageState extends State<StyleTextPage> {
                   height: 10.0,
                 ),
                 TextFormField(
+                  controller: _lastNameController,
                   textInputAction: TextInputAction.next,
+                  validator: (text) {
+                    if (text == null || text.isEmpty) {
+                      return 'Este campo precisa ser preenchido';
+                    }
+                    return null;
+                  },
                   decoration: const InputDecoration(
                     label: Text('Sobrenome'),
                     hintText: 'Digite seu sobrenome',
@@ -84,6 +103,12 @@ class _StyleTextPageState extends State<StyleTextPage> {
                 ),
                 TextFormField(
                   controller: _descriptionController,
+                  validator: (text) {
+                    if (text == null || text.isEmpty) {
+                      return 'Este campo precisa ser preenchido';
+                    }
+                    return null;
+                  },
                   style: TextStyle(
                     fontStyle: isItalic ? FontStyle.italic : null,
                     fontWeight: isBold ? FontWeight.bold : null,
@@ -123,10 +148,14 @@ class _StyleTextPageState extends State<StyleTextPage> {
                     decoration: BoxDecoration(
                       border: Border.all(color: Colors.black, width: 1.0),
                     ),
-                    child: const Padding(
-                      padding: EdgeInsets.all(0.0),
-                      child: Text(
-                          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. In facilisis auctor laoreet. Aenean varius fringilla dolor facilisis efficitur. Maecenas eleifend laoreet leo, ut faucibus urna tempus ut. Mauris ullamcorper et enim a pulvinar. Nulla molestie tortor et imperdiet luctus. Maecenas vel libero at ipsum condimentum egestas eget vel enim. Integer ut orci vitae sem auctor iaculis non id lectus. Pellentesque lobortis, libero id tempus dignissim, urna ex dapibus ante, sed tincidunt justo orci ut metus. Donec at ante laoreet dolor pharetra hendrerit id vel nisl.'),
+                    child: Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: SingleChildScrollView(
+                        child: Text(
+                          loremText,
+                          overflow: TextOverflow.fade,
+                        ),
+                      ),
                     ),
                   ),
                 ),
@@ -194,7 +223,16 @@ class _StyleTextPageState extends State<StyleTextPage> {
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      if (_formKey.currentState!.validate()) {
+                        _formKey.currentState!.save();
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Enviando dados!'),
+                          ),
+                        );
+                      }
+                    },
                     child: const Text('Enviar'),
                   ),
                 )
