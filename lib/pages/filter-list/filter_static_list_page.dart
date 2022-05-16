@@ -86,7 +86,7 @@ class _FilterStaticListState extends State<FilterStaticList> {
                     ),
                   );
                 },
-                // ! INCORRETO
+                // ! corrigir estilo da listview
                 optionsViewBuilder: (
                   BuildContext context,
                   AutocompleteOnSelected<String> onSelected,
@@ -95,23 +95,27 @@ class _FilterStaticListState extends State<FilterStaticList> {
                   return Align(
                     alignment: Alignment.topLeft,
                     child: Material(
+                      elevation: 4.0,
                       child: Container(
                         width: 300,
-                        color: Colors.cyan,
-                        child: ListView.builder(
-                            padding: EdgeInsets.all(10.0),
-                            itemCount: options.length,
-                            itemBuilder: (context, index) {
-                              final String name = options.elementAt(index);
-                              return GestureDetector(
-                                onTap: () {
-                                  onSelected(name);
-                                },
-                                child: ListTile(
-                                  title: Text(name),
-                                ),
-                              );
-                            }),
+                        height: 200,
+                        color: Colors.green,
+                        child: Expanded(
+                          child: ListView.builder(
+                              padding: EdgeInsets.all(10.0),
+                              itemCount: options.length,
+                              itemBuilder: (context, index) {
+                                final String name = options.elementAt(index);
+                                return GestureDetector(
+                                  onTap: () {
+                                    onSelected(name);
+                                  },
+                                  child: ListTile(
+                                    title: Text(name),
+                                  ),
+                                );
+                              }),
+                        ),
                       ),
                     ),
                   );
