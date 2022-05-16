@@ -9,33 +9,60 @@ class LightPage extends StatefulWidget {
 
 class _LightPageState extends State<LightPage> {
   bool value = true;
+  bool lightValue = false;
+  bool isDark = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: lightValue ? Color.fromRGBO(12, 12, 12, 1) : null,
       appBar: AppBar(
+        backgroundColor: lightValue ? Color.fromARGB(75, 75, 75, 75) : null,
+        actions: [
+          Row(
+            children: [
+              Icon(Icons.sunny),
+              Switch(
+                value: lightValue,
+                onChanged: (lightValue) {
+                  setState(() => {
+                        this.lightValue = lightValue,
+                      });
+                },
+              ),
+              Icon(Icons.dark_mode),
+            ],
+          )
+        ],
         title: Text('Light'),
         centerTitle: true,
       ),
       body: Padding(
         padding: EdgeInsets.all(10.0),
         child: Center(
-          child: Expanded(
-            child: Column(
-              children: [
-                value == true ? lightOn() : lightOff(),
-                const SizedBox(
-                  height: 10.0,
-                ),
-                Text('Ligar/Desligar'),
-                Switch.adaptive(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              value == true ? lightOn() : lightOff(),
+              const SizedBox(
+                height: 10.0,
+              ),
+              Text(
+                'Ligar/Desligar',
+                style: TextStyle(
+                    color: lightValue ? Colors.white : Colors.black,
+                    fontSize: 20),
+              ),
+              Transform.scale(
+                scale: 2,
+                child: Switch.adaptive(
                     value: value,
                     onChanged: (value) {
                       setState(() => {
                             this.value = value,
                           });
                     }),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),
@@ -44,27 +71,19 @@ class _LightPageState extends State<LightPage> {
 
   Widget lightOff() {
     return Container(
-      width: 100.0,
-      height: 100.0,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        border: Border.all(),
-        color: Colors.white70,
+      child: Icon(
+        Icons.sunny,
+        size: 150,
       ),
     );
   }
 
   Widget lightOn() {
     return Container(
-      width: 100.0,
-      height: 100.0,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        border: Border.all(),
+      child: Icon(
+        Icons.sunny,
+        size: 150,
         color: Colors.yellow,
-        boxShadow: [
-          BoxShadow(color: Colors.yellow, spreadRadius: 10.0, blurRadius: 10.0)
-        ],
       ),
     );
   }
