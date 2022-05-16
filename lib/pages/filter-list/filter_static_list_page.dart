@@ -87,9 +87,11 @@ class _FilterStaticListState extends State<FilterStaticList> {
                   );
                 },
                 // ! INCORRETO
-                optionsViewBuilder: (BuildContext context,
-                    AutocompleteOnSelected<String> onSelected,
-                    Iterable<String> options) {
+                optionsViewBuilder: (
+                  BuildContext context,
+                  AutocompleteOnSelected<String> onSelected,
+                  Iterable<String> options,
+                ) {
                   return Align(
                     alignment: Alignment.topLeft,
                     child: Material(
@@ -98,13 +100,15 @@ class _FilterStaticListState extends State<FilterStaticList> {
                         color: Colors.cyan,
                         child: ListView.builder(
                             padding: EdgeInsets.all(10.0),
-                            itemCount: _jogos.length,
+                            itemCount: options.length,
                             itemBuilder: (context, index) {
-                              final String name = _jogos.elementAt(index);
+                              final String name = options.elementAt(index);
                               return GestureDetector(
-                                onTap: () {},
+                                onTap: () {
+                                  onSelected(name);
+                                },
                                 child: ListTile(
-                                  title: Text(_jogos[index]),
+                                  title: Text(name),
                                 ),
                               );
                             }),
