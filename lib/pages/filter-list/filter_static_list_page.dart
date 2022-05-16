@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
@@ -52,20 +54,6 @@ class _FilterStaticListState extends State<FilterStaticList> {
         child: Center(
           child: Column(
             children: [
-              TextField(
-                controller: controller,
-                autofocus: true,
-                // onChanged: _searchFunc,
-                decoration: const InputDecoration(
-                  prefixIcon: Icon(Icons.search),
-                  label: Text('Pesquisa'),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(5.0),
-                    ),
-                  ),
-                ),
-              ),
               Autocomplete(
                 optionsBuilder: (TextEditingValue textEditingValue) {
                   if (textEditingValue.text.trim() == '') {
@@ -76,6 +64,53 @@ class _FilterStaticListState extends State<FilterStaticList> {
                         .toLowerCase()
                         .contains(textEditingValue.text.toLowerCase());
                   });
+                },
+                displayStringForOption: (String name) => name,
+                fieldViewBuilder: (BuildContext context,
+                    TextEditingController controller,
+                    FocusNode myFocusNode,
+                    VoidCallback onFiendSubmitted) {
+                  return TextField(
+                    controller: controller,
+                    autofocus: true,
+                    focusNode: myFocusNode,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                    decoration: const InputDecoration(
+                      prefixIcon: Icon(Icons.search),
+                      label: Text('Pesquisa'),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(5.0),
+                        ),
+                      ),
+                    ),
+                  );
+                },
+                // ! INCORRETO
+                optionsViewBuilder: (BuildContext context,
+                    AutocompleteOnSelected<String> onSelected,
+                    Iterable<String> options) {
+                  return Align(
+                    alignment: Alignment.topLeft,
+                    child: Material(
+                      child: Container(
+                        width: 300,
+                        color: Colors.cyan,
+                        child: ListView.builder(
+                            padding: EdgeInsets.all(10.0),
+                            itemCount: _jogos.length,
+                            itemBuilder: (context, index) {
+                              final String name = _jogos.elementAt(index);
+                              return GestureDetector(
+                                onTap: () {},
+                                child: ListTile(
+                                  title: Text(_jogos[index]),
+                                ),
+                              );
+                            }),
+                      ),
+                    ),
+                  );
                 },
               ),
               const Divider(
@@ -94,7 +129,7 @@ class _FilterStaticListState extends State<FilterStaticList> {
                     );
                   },
                 ),
-              )
+              ),
             ],
           ),
         ),
