@@ -66,16 +66,18 @@ class _FilterStaticListState extends State<FilterStaticList> {
                   ),
                 ),
               ),
-              Autocomplete(optionsBuilder: (TextEditingValue textEditingValue) {
-                if (textEditingValue.text.trim() == '') {
-                  return const Iterable<String>.empty();
-                }
-                return _jogos.where((String option) {
-                  return option
-                      .toLowerCase()
-                      .contains(textEditingValue.text.toLowerCase());
-                });
-              }),
+              Autocomplete(
+                optionsBuilder: (TextEditingValue textEditingValue) {
+                  if (textEditingValue.text.trim() == '') {
+                    return const Iterable<String>.empty();
+                  }
+                  return _jogos.where((String option) {
+                    return option
+                        .toLowerCase()
+                        .contains(textEditingValue.text.toLowerCase());
+                  });
+                },
+              ),
               const Divider(
                 color: Colors.transparent,
               ),
