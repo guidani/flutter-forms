@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:forms/pages/styleText/mock_text.dart';
 import 'package:forms/pages/styleText/my_date_picker.dart';
+import 'package:forms/pages/styleText/radio_boxes_widget.dart';
 import 'package:forms/pages/styleText/terms_widget.dart';
 
 class StyleTextPage extends StatefulWidget {
@@ -9,8 +10,6 @@ class StyleTextPage extends StatefulWidget {
   @override
   State<StyleTextPage> createState() => _StyleTextPageState();
 }
-
-enum PersonGender { masculino, feminino, outro }
 
 class _StyleTextPageState extends State<StyleTextPage> {
   final _formKey = GlobalKey<FormState>();
@@ -27,8 +26,6 @@ class _StyleTextPageState extends State<StyleTextPage> {
     "isBold": false,
     "isUnderline": false
   };
-
-  PersonGender? _personGender = PersonGender.masculino;
 
   bool _telemetryCheckbox = false;
   bool _promotionCheckbox = false;
@@ -130,42 +127,7 @@ class _StyleTextPageState extends State<StyleTextPage> {
                       style: TextStyle(fontSize: 15),
                     ),
                   ),
-                  ListTile(
-                    title: const Text('Masculino'),
-                    leading: Radio<PersonGender>(
-                      value: PersonGender.masculino,
-                      groupValue: _personGender,
-                      onChanged: (PersonGender? value) {
-                        setState(() {
-                          _personGender = value;
-                        });
-                      },
-                    ),
-                  ),
-                  ListTile(
-                    title: const Text('Feminino'),
-                    leading: Radio<PersonGender>(
-                      value: PersonGender.feminino,
-                      groupValue: _personGender,
-                      onChanged: (PersonGender? value) {
-                        setState(() {
-                          _personGender = value;
-                        });
-                      },
-                    ),
-                  ),
-                  ListTile(
-                    title: const Text('Outro'),
-                    leading: Radio<PersonGender>(
-                      value: PersonGender.outro,
-                      groupValue: _personGender,
-                      onChanged: (PersonGender? value) {
-                        setState(() {
-                          _personGender = value;
-                        });
-                      },
-                    ),
-                  ),
+                  RadioBoxesWidget(),
                   const SizedBox(height: 10.0),
                   TextFormField(
                     controller: _descriptionController,
