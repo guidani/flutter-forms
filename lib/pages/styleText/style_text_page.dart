@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:forms/pages/styleText/mock_text.dart';
+import 'package:forms/pages/styleText/my_date_picker.dart';
 
 class StyleTextPage extends StatefulWidget {
   const StyleTextPage({Key? key}) : super(key: key);
@@ -103,19 +104,38 @@ class _StyleTextPageState extends State<StyleTextPage> {
                       border: OutlineInputBorder(),
                     ),
                   ),
-// ! NÃO FUNCIONANDO
-                  InputDatePickerFormField(
-                    errorFormatText: 'Formato de data incorreta',
-                    errorInvalidText: 'Data inválida',
-                    fieldHintText: 'dd/mm/YYYY',
-                    fieldLabelText: 'Data de nascimento',
-                    // initialDate: DateTime.now(),
-                    firstDate: DateTime(1900),
-                    lastDate: DateTime(2999),
+                  const SizedBox(
+                    height: 10.0,
                   ),
                   const SizedBox(
                     height: 10.0,
                   ),
+                  const Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      'Data de nascimento: ',
+                      style: TextStyle(fontSize: 15),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.only(bottom: 10.0),
+                    decoration: const BoxDecoration(
+                      border: Border(
+                        bottom: BorderSide(width: 1.0, color: Colors.grey),
+                      ),
+                    ),
+                    child: MyDatePicker(),
+                  ),
+// ! NÃO FUNCIONANDO
+                  // InputDatePickerFormField(
+                  //   errorFormatText: 'Formato de data incorreta',
+                  //   errorInvalidText: 'Data inválida',
+                  //   fieldHintText: 'dd/mm/YYYY',
+                  //   fieldLabelText: 'Data de nascimento',
+                  //   // initialDate: DateTime.now(),
+                  //   firstDate: DateTime(1900),
+                  //   lastDate: DateTime(2999),
+                  // ),
                   const SizedBox(
                     height: 10.0,
                   ),
