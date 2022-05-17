@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:forms/pages/styleText/checkbox_widget.dart';
 import 'package:forms/pages/styleText/description_widget.dart';
 import 'package:forms/pages/styleText/mock_text.dart';
 import 'package:forms/pages/styleText/my_date_picker.dart';
@@ -18,10 +19,6 @@ class _StyleTextPageState extends State<StyleTextPage> {
   TextEditingController _nameController = TextEditingController();
   TextEditingController _lastNameController = TextEditingController();
 
-  bool _telemetryCheckbox = false;
-  bool _promotionCheckbox = false;
-  bool _serviceTermsCheckbox = false;
-  bool _acceptAllTerms = false;
 
   @override
   void initState() {
@@ -119,47 +116,7 @@ class _StyleTextPageState extends State<StyleTextPage> {
                   const SizedBox(height: 10.0),
                   const UserTermsWidget(),
                   const SizedBox(height: 10.0),
-                  CheckboxListTile(
-                    title: const Text(
-                        'Aceito compartilhar dados para melhoria do aplicativo.'),
-                    value: _telemetryCheckbox,
-                    onChanged: (value) {
-                      setState(() {
-                        _telemetryCheckbox = value!;
-                      });
-                    },
-                  ),
-                  CheckboxListTile(
-                    title: const Text(
-                        'Aceito receber comunicação sobre promoções.”'),
-                    value: _promotionCheckbox,
-                    onChanged: (value) {
-                      setState(() {
-                        _promotionCheckbox = value!;
-                      });
-                    },
-                  ),
-                  CheckboxListTile(
-                    title: const Text('Aceito os termos de serviço.'),
-                    value: _serviceTermsCheckbox,
-                    onChanged: (value) {
-                      setState(() {
-                        _serviceTermsCheckbox = value!;
-                      });
-                    },
-                  ),
-                  CheckboxListTile(
-                    title: const Text('Aceitar todos os items acima.'),
-                    value: _acceptAllTerms,
-                    onChanged: (value) {
-                      setState(() {
-                        _acceptAllTerms = value!;
-                        _serviceTermsCheckbox = value;
-                        _promotionCheckbox = value;
-                        _telemetryCheckbox = value;
-                      });
-                    },
-                  ),
+                  CheckboxWidget(),
                   const SizedBox(
                     height: 10.0,
                   ),
