@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:forms/pages/styleText/description_widget.dart';
 import 'package:forms/pages/styleText/mock_text.dart';
 import 'package:forms/pages/styleText/my_date_picker.dart';
 import 'package:forms/pages/styleText/radio_boxes_widget.dart';
@@ -14,25 +15,13 @@ class StyleTextPage extends StatefulWidget {
 class _StyleTextPageState extends State<StyleTextPage> {
   final _formKey = GlobalKey<FormState>();
   late FocusNode myFocusNode;
-  TextEditingController _descriptionController = TextEditingController();
   TextEditingController _nameController = TextEditingController();
   TextEditingController _lastNameController = TextEditingController();
-
-  bool isItalic = false;
-  bool isBold = false;
-  bool isUnderline = false;
-  Map<String, dynamic> decorations = {
-    "isItalic": false,
-    "isBold": false,
-    "isUnderline": false
-  };
 
   bool _telemetryCheckbox = false;
   bool _promotionCheckbox = false;
   bool _serviceTermsCheckbox = false;
   bool _acceptAllTerms = false;
-
-  List<bool> _selections = List.generate(3, (_) => false);
 
   @override
   void initState() {
@@ -67,7 +56,6 @@ class _StyleTextPageState extends State<StyleTextPage> {
                   ),
                   const Divider(),
                   TextFormField(
-                    onChanged: (value) {},
                     controller: _nameController,
                     textInputAction: TextInputAction.next,
                     autofocus: true,
@@ -117,9 +105,7 @@ class _StyleTextPageState extends State<StyleTextPage> {
                     ),
                     child: MyDatePicker(),
                   ),
-                  const SizedBox(
-                    height: 10.0,
-                  ),
+                  const SizedBox(height: 10.0),
                   const Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
@@ -129,44 +115,7 @@ class _StyleTextPageState extends State<StyleTextPage> {
                   ),
                   RadioBoxesWidget(),
                   const SizedBox(height: 10.0),
-                  TextFormField(
-                    controller: _descriptionController,
-                    validator: (text) {
-                      if (text == null || text.isEmpty) {
-                        return 'Este campo precisa ser preenchido';
-                      }
-                      return null;
-                    },
-                    style: TextStyle(
-                      fontStyle: isItalic ? FontStyle.italic : null,
-                      fontWeight: isBold ? FontWeight.bold : null,
-                      decoration: isUnderline ? TextDecoration.underline : null,
-                    ),
-                    decoration: const InputDecoration(
-                      label: Text('Descrição'),
-                      hintText: 'Fale um pouco sobre você',
-                      border: OutlineInputBorder(),
-                    ),
-                  ),
-                  const SizedBox(height: 10.0),
-                  ToggleButtons(
-                    children: const [
-                      Icon(Icons.format_italic),
-                      Icon(Icons.format_bold),
-                      Icon(Icons.format_underline),
-                    ],
-                    isSelected: _selections,
-                    color: Colors.grey,
-                    selectedColor: Colors.black,
-                    onPressed: (int index) {
-                      setState(() {
-                        _selections[index] = !_selections[index];
-                        isBold = _selections[0];
-                        isItalic = _selections[1];
-                        isUnderline = _selections[2];
-                      });
-                    },
-                  ),
+                  DescriptionWidget(),
                   const SizedBox(height: 10.0),
                   const UserTermsWidget(),
                   const SizedBox(height: 10.0),
