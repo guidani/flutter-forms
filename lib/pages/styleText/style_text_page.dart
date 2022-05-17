@@ -126,16 +126,6 @@ class _StyleTextPageState extends State<StyleTextPage> {
                     ),
                     child: MyDatePicker(),
                   ),
-// ! NÃO FUNCIONANDO
-                  // InputDatePickerFormField(
-                  //   errorFormatText: 'Formato de data incorreta',
-                  //   errorInvalidText: 'Data inválida',
-                  //   fieldHintText: 'dd/mm/YYYY',
-                  //   fieldLabelText: 'Data de nascimento',
-                  //   // initialDate: DateTime.now(),
-                  //   firstDate: DateTime(1900),
-                  //   lastDate: DateTime(2999),
-                  // ),
                   const SizedBox(
                     height: 10.0,
                   ),
