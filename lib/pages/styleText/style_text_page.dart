@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:forms/pages/styleText/mock_text.dart';
 import 'package:forms/pages/styleText/my_date_picker.dart';
+import 'package:forms/pages/styleText/terms_widget.dart';
 
 class StyleTextPage extends StatefulWidget {
   const StyleTextPage({Key? key}) : super(key: key);
@@ -86,9 +87,7 @@ class _StyleTextPageState extends State<StyleTextPage> {
                       border: OutlineInputBorder(),
                     ),
                   ),
-                  const SizedBox(
-                    height: 10.0,
-                  ),
+                  const SizedBox(height: 10.0),
                   TextFormField(
                     controller: _lastNameController,
                     textInputAction: TextInputAction.next,
@@ -104,12 +103,7 @@ class _StyleTextPageState extends State<StyleTextPage> {
                       border: OutlineInputBorder(),
                     ),
                   ),
-                  const SizedBox(
-                    height: 10.0,
-                  ),
-                  const SizedBox(
-                    height: 10.0,
-                  ),
+                  const SizedBox(height: 10.0),
                   const Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
@@ -172,9 +166,7 @@ class _StyleTextPageState extends State<StyleTextPage> {
                       },
                     ),
                   ),
-                  const SizedBox(
-                    height: 10.0,
-                  ),
+                  const SizedBox(height: 10.0),
                   TextFormField(
                     controller: _descriptionController,
                     validator: (text) {
@@ -194,9 +186,7 @@ class _StyleTextPageState extends State<StyleTextPage> {
                       border: OutlineInputBorder(),
                     ),
                   ),
-                  const SizedBox(
-                    height: 10.0,
-                  ),
+                  const SizedBox(height: 10.0),
                   ToggleButtons(
                     children: const [
                       Icon(Icons.format_italic),
@@ -215,27 +205,9 @@ class _StyleTextPageState extends State<StyleTextPage> {
                       });
                     },
                   ),
-                  const SizedBox(
-                    height: 10.0,
-                  ),
-                  Container(
-                    height: 200,
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.black, width: 1.0),
-                    ),
-                    child: const Padding(
-                      padding: EdgeInsets.all(10.0),
-                      child: SingleChildScrollView(
-                        child: Text(
-                          loremText,
-                          overflow: TextOverflow.fade,
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 10.0,
-                  ),
+                  const SizedBox(height: 10.0),
+                  const UserTermsWidget(),
+                  const SizedBox(height: 10.0),
                   CheckboxListTile(
                     title: const Text(
                         'Aceito compartilhar dados para melhoria do aplicativo.'),
