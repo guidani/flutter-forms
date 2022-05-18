@@ -8,26 +8,16 @@ class CheckboxWidget extends StatefulWidget {
 }
 
 class _CheckboxWidgetState extends State<CheckboxWidget> {
-  bool _telemetryCheckbox = false;
-  bool _promotionCheckbox = false;
-  bool _serviceTermsCheckbox = false;
-  bool _acceptAllTerms = false;
+  bool? _promotionCheckbox = false;
+  bool? _serviceTermsCheckbox = false;
+  bool? _acceptAllTerms = false;
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         CheckboxListTile(
-          title: const Text(
-              'Aceito compartilhar dados para melhoria do aplicativo.'),
-          value: _telemetryCheckbox,
-          onChanged: (value) {
-            setState(() {
-              _telemetryCheckbox = value!;
-            });
-          },
-        ),
-        CheckboxListTile(
-          title: const Text('Aceito receber comunicação sobre promoções.”'),
+          title: const Text('Aceito receber comunicação sobre promoções.'),
           value: _promotionCheckbox,
           onChanged: (value) {
             setState(() {
@@ -45,14 +35,14 @@ class _CheckboxWidgetState extends State<CheckboxWidget> {
           },
         ),
         CheckboxListTile(
+          tristate: true,
           title: const Text('Aceitar todos os items acima.'),
           value: _acceptAllTerms,
           onChanged: (value) {
             setState(() {
-              _acceptAllTerms = value!;
+              _acceptAllTerms = value;
               _serviceTermsCheckbox = value;
               _promotionCheckbox = value;
-              _telemetryCheckbox = value;
             });
           },
         ),
