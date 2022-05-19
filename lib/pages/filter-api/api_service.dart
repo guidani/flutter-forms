@@ -1,7 +1,8 @@
 import 'dart:convert';
 
-import 'package:forms/pages/filter-api/user_model.dart';
 import 'package:http/http.dart' as http;
+
+import 'package:forms/pages/filter-api/user_model.dart';
 
 class FetchUser {
   var data = [];
