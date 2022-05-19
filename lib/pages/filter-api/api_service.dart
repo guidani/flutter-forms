@@ -19,7 +19,7 @@ class FetchUser {
         if (query != null) {
           results = results
               .where((element) =>
-                  element.name!.toLowerCase().contains((query.toLowerCase())))
+                  element.name.toLowerCase().contains((query.toLowerCase())))
               .toList();
         }
       } else {

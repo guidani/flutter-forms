@@ -43,6 +43,7 @@ class _StyleTextPageState extends State<StyleTextPage> {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Form(
+            autovalidateMode: AutovalidateMode.onUserInteraction,
             key: _formKey,
             child: SingleChildScrollView(
               child: Column(
