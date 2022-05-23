@@ -19,7 +19,6 @@ class _StyleTextPageState extends State<StyleTextPage> {
   TextEditingController _nameController = TextEditingController();
   TextEditingController _lastNameController = TextEditingController();
 
-
   @override
   void initState() {
     super.initState();
@@ -87,6 +86,8 @@ class _StyleTextPageState extends State<StyleTextPage> {
                     ),
                   ),
                   const SizedBox(height: 10.0),
+                  DescriptionWidget(),
+                  const SizedBox(height: 10.0),
                   const Align(
                     alignment: Alignment.centerLeft,
                     child: Text(
@@ -112,8 +113,6 @@ class _StyleTextPageState extends State<StyleTextPage> {
                     ),
                   ),
                   RadioBoxesWidget(),
-                  const SizedBox(height: 10.0),
-                  DescriptionWidget(),
                   const SizedBox(height: 10.0),
                   const UserTermsWidget(),
                   const SizedBox(height: 10.0),
